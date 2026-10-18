@@ -266,6 +266,8 @@ export const portfolioData: PortfolioData = {
   ui: {
     skipToContent: { en: "Skip to content", vi: "Bỏ qua đến nội dung" },
     languageLabel: { en: "Choose language", vi: "Chọn ngôn ngữ" },
+    openMenu: { en: "Open menu", vi: "Mở menu" },
+    closeMenu: { en: "Close menu", vi: "Đóng menu" },
     exploreProjects: { en: "Explore projects", vi: "Khám phá dự án" },
     contactMe: { en: "Contact me", vi: "Liên hệ mình" },
     viewCaseStudy: { en: "View case study", vi: "Xem chi tiết" },

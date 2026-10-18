@@ -81,6 +81,8 @@ export interface PortfolioData {
   ui: {
     skipToContent: LocalizedText;
     languageLabel: LocalizedText;
+    openMenu: LocalizedText;
+    closeMenu: LocalizedText;
     exploreProjects: LocalizedText;
     contactMe: LocalizedText;
     viewCaseStudy: LocalizedText;
