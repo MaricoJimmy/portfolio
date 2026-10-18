@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { ProjectDialog } from "@/components/sections/project-dialog";
 import { ProjectArtwork } from "@/components/ui/project-artwork";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Reveal } from "@/components/ui/reveal";
 import { portfolioData } from "@/data/portfolio";
 import { useLanguage } from "@/providers/language-provider";
 import type { ProjectCategory, ProjectEvidence } from "@/types/portfolio";
@@ -55,7 +56,7 @@ export function Projects() {
         </div>
       </div>
 
-      <div className="project-grid">
+      <Reveal className="project-grid">
         {visibleProjects.map((project, index) => (
           <article className="project-card" data-featured={index < 2} key={project.id}>
             <ProjectArtwork abstractLabel={t(portfolioData.ui.abstractPreview)} project={project} />
@@ -91,7 +92,7 @@ export function Projects() {
             </div>
           </article>
         ))}
-      </div>
+      </Reveal>
 
       <ProjectDialog
         onOpenChange={(open) => !open && setSelectedProject(null)}

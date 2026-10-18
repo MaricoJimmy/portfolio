@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
+import { Reveal } from "@/components/ui/reveal";
 import { portfolioData } from "@/data/portfolio";
 import { useLanguage } from "@/providers/language-provider";
 
@@ -44,7 +45,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="hero-copy">
+      <Reveal className="hero-copy" delay={0.08}>
         <p className="hero-eyebrow">{t(profile.eyebrow)}</p>
         <h1 id="hero-title">{t(profile.name)}</h1>
         <p className="hero-role">{t(profile.role)}</p>
@@ -60,7 +61,7 @@ export function Hero() {
             <ArrowUpRight aria-hidden="true" size={18} />
           </a>
         </div>
-      </div>
+      </Reveal>
 
       <div className="hero-rail">
         <div className="hero-socials">

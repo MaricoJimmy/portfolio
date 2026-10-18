@@ -3,6 +3,7 @@
 import { ArrowDownRight } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Reveal } from "@/components/ui/reveal";
 import { portfolioData } from "@/data/portfolio";
 import { useLanguage } from "@/providers/language-provider";
 
@@ -16,7 +17,7 @@ export function About() {
         eyebrow="02 / Profile"
         title={language === "en" ? "Engineering with evidence." : "Kỹ thuật dựa trên bằng chứng."}
       />
-      <div className="about-grid">
+      <Reveal className="about-grid">
         <p className="about-lead">{t(profile.biography)}</p>
         <div className="about-notes">
           <article>
@@ -31,7 +32,7 @@ export function About() {
           </article>
         </div>
         <ArrowDownRight aria-hidden="true" className="about-arrow" size={56} />
-      </div>
+      </Reveal>
     </section>
   );
 }

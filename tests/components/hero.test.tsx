@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import HomePage from "@/app/page";
@@ -13,9 +13,10 @@ describe("portfolio home page", () => {
     );
 
     expect(screen.getByRole("main")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 1, name: /vu van tung/i }),
-    ).toBeInTheDocument();
+    const heading = screen.getByRole("heading", { level: 1, name: /vu van tung/i });
+    const hero = heading.closest("section");
+    expect(hero).not.toBeNull();
+    const heroQueries = within(hero as HTMLElement);
     expect(
       screen.getByText("Software Engineer / Aspiring AI Engineer"),
     ).toBeInTheDocument();
@@ -31,12 +32,12 @@ describe("portfolio home page", () => {
       "href",
       "#contact",
     );
-    expect(screen.getByRole("link", { name: "GitHub" })).toHaveAttribute(
+    expect(heroQueries.getByRole("link", { name: "GitHub" })).toHaveAttribute(
       "href",
       "https://github.com/MaricoJimmy",
     );
-    expect(screen.getByRole("link", { name: "LinkedIn" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Email" })).toHaveAttribute(
+    expect(heroQueries.getByRole("link", { name: "LinkedIn" })).toBeInTheDocument();
+    expect(heroQueries.getByRole("link", { name: "Email" })).toHaveAttribute(
       "href",
       "mailto:vuvantung204@gmail.com",
     );
