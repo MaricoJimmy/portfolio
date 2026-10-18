@@ -505,4 +505,3 @@ For every defect, identify the responsible component, make the smallest change, 
 git add src public output/playwright
 git commit -m "test: verify responsive portfolio experience"
 ```
-
