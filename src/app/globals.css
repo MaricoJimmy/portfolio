@@ -278,6 +278,26 @@ button {
   pointer-events: none;
 }
 
+.ai-core,
+.ai-core canvas,
+.ai-core-fallback {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.ai-core-fallback {
+  background:
+    radial-gradient(circle at 45% 48%, rgb(157 239 255 / 28%) 0 0.35rem, transparent 0.42rem),
+    radial-gradient(circle at 45% 48%, transparent 0 12%, rgb(255 255 255 / 36%) 12.2% 12.5%, transparent 12.8% 22%, rgb(157 239 255 / 24%) 22.2% 22.5%, transparent 22.8%);
+  filter: drop-shadow(0 0 1.5rem rgb(107 231 255 / 20%));
+}
+
+.ai-core canvas {
+  z-index: 1;
+}
+
 .hero-copy {
   display: flex;
   align-self: center;

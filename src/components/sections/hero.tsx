@@ -1,10 +1,19 @@
 "use client";
 
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 
 import { portfolioData } from "@/data/portfolio";
 import { useLanguage } from "@/providers/language-provider";
+
+const AiCoreCanvas = dynamic(
+  () => import("@/components/three/ai-core-canvas").then((module) => module.AiCoreCanvas),
+  {
+    loading: () => <div aria-hidden="true" className="ai-core-fallback" data-testid="ai-core-fallback" />,
+    ssr: false,
+  },
+);
 
 export function Hero() {
   const { language, t } = useLanguage();
@@ -21,7 +30,9 @@ export function Hero() {
         </div>
         <div aria-hidden="true" className="hero-orbit hero-orbit-one" />
         <div aria-hidden="true" className="hero-orbit hero-orbit-two" />
-        <div id="ai-core-mount" />
+        <div id="ai-core-mount">
+          <AiCoreCanvas />
+        </div>
         <Image
           alt={portraitAlt}
           className="hero-portrait"
