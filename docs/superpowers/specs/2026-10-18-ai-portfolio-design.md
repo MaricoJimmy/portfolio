@@ -25,7 +25,7 @@ Success means that a visitor can quickly understand the candidate's direction, i
 
 ## 3. Experience concept
 
-The selected direction is **Editorial AI Lab**. It combines the asymmetric editorial composition of the supplied visual reference with a restrained AI engineering interface language.
+The selected direction is **Editorial AI Lab**. It combines the asymmetric editorial composition of the supplied visual reference with a restrained AI engineering interface language. A generated semi-realistic 3D portrait, derived from the owner's supplied photograph with permission, adds a personal focal point without replacing the technical AI Core motif.
 
 The visual system uses:
 
@@ -55,14 +55,16 @@ A fixed navigation provides section links and an active-section indicator. A flo
 
 The desktop hero appears as a large rounded black editorial frame over the textured light-gray background.
 
-- Left/center: an asymmetric violet geometric field containing a custom interactive AI Core.
+- Left/center: an asymmetric violet geometric field containing the generated transparent 3D portrait, framed by a custom interactive AI Core and orbital elements.
 - Right: oversized introduction copy, including “Hey — I'm Vu Van Tung” and “Software Engineer / Aspiring AI Engineer.”
 - Supporting copy: a short, credible positioning statement centered on computer vision and production-oriented AI.
 - Primary CTA: Explore Projects.
 - Secondary CTA: Contact Me.
 - Footer rail: GitHub, LinkedIn, email, scroll cue, and small technical labels.
 
-The AI Core consists of a central faceted form, layered rings/orbits, restrained particles, and dynamic violet/blue lighting. Pointer input causes controlled parallax and rotation. Scroll input shifts the camera and decomposes the orbital layers slightly. The motion remains subtle enough to preserve text readability.
+The AI Core consists of a central faceted form, layered rings/orbits, restrained particles, and dynamic violet/blue lighting positioned around the portrait. The portrait remains a crisp, accessible image layer rather than being distorted as a WebGL texture. Pointer input causes controlled parallax and rotation in the surrounding core. Scroll input shifts the camera and decomposes the orbital layers slightly. The motion remains subtle enough to preserve the portrait and text readability.
+
+The approved portrait asset is stored at `public/images/vu-van-tung-3d-portrait.png`. The original photograph remains outside the project and is not copied into the repository.
 
 On mobile, content becomes a vertical composition. The 3D field remains visible but uses fewer particles, lower pixel density, reduced pointer effects, and shorter motion sequences.
 
