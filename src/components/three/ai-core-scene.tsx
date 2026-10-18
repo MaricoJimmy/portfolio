@@ -3,7 +3,7 @@
 import { Float, Icosahedron, Instances, Instance, Sparkles } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
-import { Group, MathUtils } from "three";
+import { Group, MathUtils, Mesh } from "three";
 
 type AiCoreSceneProps = {
   active: boolean;
@@ -13,6 +13,7 @@ type AiCoreSceneProps = {
 
 export function AiCoreScene({ active, compact, reducedMotion }: AiCoreSceneProps) {
   const core = useRef<Group>(null);
+  const rings = useRef<Array<Mesh | null>>([]);
   const particles = useMemo(
     () =>
       Array.from({ length: compact ? 14 : 30 }, (_, index) => {
@@ -43,6 +44,13 @@ export function AiCoreScene({ active, compact, reducedMotion }: AiCoreSceneProps
       state.pointer.x * response,
       0.035,
     );
+    for (let index = 0; index < rings.current.length; index += 1) {
+      const ring = rings.current[index];
+      if (!ring) continue;
+      const separation = 1 + scrollShift * (index + 1) * 0.14;
+      ring.scale.setScalar(MathUtils.lerp(ring.scale.x, separation, 0.04));
+      ring.rotation.z += delta * (0.035 + index * 0.018);
+    }
   });
 
   return (
@@ -61,9 +69,22 @@ export function AiCoreScene({ active, compact, reducedMotion }: AiCoreSceneProps
             roughness={0.2}
           />
         </Icosahedron>
+        <Icosahedron args={[0.78, 2]}>
+          <meshStandardMaterial
+            color="#9defff"
+            emissive="#6be7ff"
+            emissiveIntensity={1.35}
+            metalness={0.55}
+            roughness={0.18}
+            wireframe
+          />
+        </Icosahedron>
         {[1.75, 2.18, 2.62].map((radius, index) => (
           <mesh
             key={radius}
+            ref={(node) => {
+              rings.current[index] = node;
+            }}
             rotation={[
               Math.PI / (2.4 + index * 0.35),
               index * 0.72,

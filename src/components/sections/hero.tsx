@@ -23,7 +23,16 @@ export function Hero() {
     language === "en" ? "Portrait of Vu Van Tung" : "Chân dung Vũ Văn Tùng";
 
   return (
-    <section aria-labelledby="hero-title" className="hero-section" id="home">
+    <section
+      aria-labelledby="hero-title"
+      className="hero-section"
+      data-visual-stage="gravity"
+      id="home"
+    >
+      <div aria-hidden="true" className="stage-coordinate">
+        <span>21.0285° N</span>
+        <span>105.8542° E</span>
+      </div>
       <div className="hero-visual">
         <div aria-hidden="true" className="hero-index">
           <span>01</span>
@@ -33,6 +42,11 @@ export function Hero() {
         <div aria-hidden="true" className="hero-orbit hero-orbit-two" />
         <div id="ai-core-mount">
           <AiCoreCanvas />
+        </div>
+        <div aria-hidden="true" className="gravity-mark" data-testid="gravity-mark">
+          <span className="gravity-mark-dot" />
+          <span className="gravity-mark-core" />
+          <span className="gravity-mark-orbit" />
         </div>
         <Image
           alt={portraitAlt}
@@ -62,6 +76,10 @@ export function Hero() {
           </a>
         </div>
       </Reveal>
+
+      <p aria-hidden="true" className="stage-manifesto">
+        HUMAN EXPERIENCE <span>×</span> ARTIFICIAL INTELLIGENCE
+      </p>
 
       <div className="hero-rail">
         <div className="hero-socials">

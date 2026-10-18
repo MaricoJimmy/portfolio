@@ -16,7 +16,9 @@ describe("portfolio home page", () => {
     const heading = screen.getByRole("heading", { level: 1, name: /vu van tung/i });
     const hero = heading.closest("section");
     expect(hero).not.toBeNull();
+    expect(hero).toHaveAttribute("data-visual-stage", "gravity");
     const heroQueries = within(hero as HTMLElement);
+    expect(heroQueries.getByTestId("gravity-mark")).toBeInTheDocument();
     expect(
       screen.getByText("Software Engineer / Aspiring AI Engineer"),
     ).toBeInTheDocument();

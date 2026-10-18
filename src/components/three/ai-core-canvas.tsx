@@ -23,7 +23,7 @@ export function AiCoreCanvas() {
 
     const coarsePointer = window.matchMedia?.("(pointer: coarse)");
     const updateQuality = () => {
-      setCompact(container.clientWidth < 560 || Boolean(coarsePointer?.matches));
+      setCompact(container.clientWidth < 260 || Boolean(coarsePointer?.matches));
     };
     const observer = new ResizeObserver(updateQuality);
     observer.observe(container);
