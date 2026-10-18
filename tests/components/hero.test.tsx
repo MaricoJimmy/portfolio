@@ -17,11 +17,15 @@ describe("portfolio home page", () => {
     const hero = heading.closest("section");
     expect(hero).not.toBeNull();
     expect(hero).toHaveAttribute("data-visual-stage", "gravity");
+    expect(hero).toHaveAttribute("data-scroll-scene", "hero");
     const heroQueries = within(hero as HTMLElement);
     expect(heroQueries.getByTestId("gravity-mark")).toBeInTheDocument();
     expect(
       screen.getByText("Software Engineer / Aspiring AI Engineer"),
     ).toBeInTheDocument();
+    expect(screen.getByText("Hello — I'm")).toHaveClass("tech-label");
+    expect(screen.getByText("21.0285° N")).toHaveClass("tech-label");
+    expect(screen.getByText(/human experience/i)).toHaveClass("tech-label");
     expect(screen.getByAltText("Portrait of Vu Van Tung")).toHaveAttribute(
       "src",
       expect.stringContaining("vu-van-tung-profile.png"),
@@ -44,5 +48,10 @@ describe("portfolio home page", () => {
       "mailto:vuvantung204@gmail.com",
     );
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+
+    const about = document.getElementById("about");
+    expect(about).toHaveAttribute("data-scroll-scene", "about");
+    expect(within(about as HTMLElement).getByTestId("about-motion-surface"))
+      .toBeInTheDocument();
   });
 });
