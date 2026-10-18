@@ -120,7 +120,12 @@ export const portfolioData: PortfolioData = {
         { label: "F1", value: "92.37%" },
         { label: "ROC-AUC", value: "97.81%" },
       ],
-      preview: { kind: "abstract" },
+      // Provenance: MaricoJimmy/Fall_detection — reports/assets/pipeline.png
+      preview: {
+        kind: "real",
+        src: "/images/projects/fall-detection-pipeline.png",
+        source: "Fall_detection/reports/assets/pipeline.png",
+      },
     },
     {
       id: "traffic-sign-recognition",
@@ -150,7 +155,12 @@ export const portfolioData: PortfolioData = {
         { label: "Precision", value: "0.826" },
         { label: "Recall", value: "0.803" },
       ],
-      preview: { kind: "abstract" },
+      // Provenance: MaricoJimmy/streetsignrecognitionproject — plots/performance_comparison.png
+      preview: {
+        kind: "real",
+        src: "/images/projects/street-sign-performance.png",
+        source: "streetsignrecognitionproject/plots/performance_comparison.png",
+      },
     },
     {
       id: "smart-cv-matching",
