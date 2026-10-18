@@ -1,7 +1,9 @@
 # Vu Van Tung — Editorial AI Portfolio Design
 
-**Date:** 2026-10-18  
-**Status:** Approved in conversation; awaiting written-spec review  
+**Date:** 2026-10-18
+
+**Status:** Approved in conversation; awaiting written-spec review
+
 **Owner:** Vu Van Tung
 
 ## 1. Product intent
