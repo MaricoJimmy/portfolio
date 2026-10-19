@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
+import { ScrollText } from "@/components/ui/scroll-text";
 import { portfolioData } from "@/data/portfolio";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useScrollMotionVariables } from "@/hooks/use-scroll-motion-variables";
@@ -65,14 +66,28 @@ export function About() {
         className="about-motion-surface"
         data-testid="about-motion-surface"
       >
-        {ripples.map((ripple) => (
-          <span
-            className="about-water-ripple"
-            data-testid="water-ripple"
-            key={ripple.id}
-            style={{ left: ripple.x, top: ripple.y }}
-          />
-        ))}
+        <svg className="liquid-edge" viewBox="0 0 1440 1200" preserveAspectRatio="none">
+          <path d="M0 90 C240 20 380 115 720 65 S1200 15 1440 85 L1440 1200 L0 1200 Z">
+            {!reducedMotion && (
+              <animate
+                attributeName="d"
+                dur="7s"
+                repeatCount="indefinite"
+                values="M0 90 C240 20 380 115 720 65 S1200 15 1440 85 L1440 1200 L0 1200 Z;M0 55 C240 110 430 15 720 60 S1200 115 1440 45 L1440 1200 L0 1200 Z;M0 90 C240 20 380 115 720 65 S1200 15 1440 85 L1440 1200 L0 1200 Z"
+              />
+            )}
+          </path>
+        </svg>
+        <div className="about-liquid-body" data-testid="about-liquid-body">
+          {ripples.map((ripple) => (
+            <span
+              className="about-water-ripple"
+              data-testid="water-ripple"
+              key={ripple.id}
+              style={{ left: ripple.x, top: ripple.y }}
+            />
+          ))}
+        </div>
       </div>
       <div className="about-heading-motion">
         <SectionHeading
@@ -82,7 +97,7 @@ export function About() {
       </div>
       <div className="about-content-motion">
         <Reveal className="about-grid">
-          <p className="about-lead">{t(profile.biography)}</p>
+          <p className="about-lead"><ScrollText text={t(profile.biography)} /></p>
           <div className="about-notes">
             <article>
               <span>01</span>

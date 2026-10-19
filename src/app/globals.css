@@ -37,7 +37,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background:
     radial-gradient(circle at 20% 0%, rgb(255 255 255 / 52%), transparent 34rem),
     var(--canvas);
@@ -1014,7 +1014,7 @@ button {
   gap: 0.25rem;
 }
 
-.section-heading span {
+.section-heading > span {
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.14em;
@@ -1594,7 +1594,7 @@ body::before {
   color: #0d0d0e;
 }
 
-.about-section .section-heading span,
+.about-section .section-heading > span,
 .about-notes span {
   color: rgb(13 13 14 / 55%);
 }
@@ -1930,6 +1930,8 @@ body::-webkit-scrollbar {
   --water-x: 50%;
   --water-y: 18%;
   isolation: isolate;
+  overflow: visible;
+  border-radius: 0;
   background: transparent;
 }
 
@@ -1937,16 +1939,8 @@ body::-webkit-scrollbar {
   position: absolute;
   z-index: -1;
   inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  background:
-    radial-gradient(
-      circle at var(--water-x) var(--water-y),
-      rgb(255 255 255 / 32%) 0,
-      rgb(196 155 255 / 20%) 9rem,
-      transparent 22rem
-    ),
-    linear-gradient(145deg, #b27aff 0%, #9862f4 52%, #a970ff 100%);
+  overflow: visible;
+  pointer-events: none;
   transform:
     translate3d(0, calc(var(--about-surface-y) * 1px), 0)
     scaleX(var(--about-surface-scale));
@@ -1954,21 +1948,62 @@ body::-webkit-scrollbar {
   will-change: transform;
 }
 
-.about-motion-surface::after {
+.about-liquid-body {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 -2px;
+  overflow: hidden;
+  border-radius: 0;
+  background:
+    radial-gradient(
+      circle at var(--water-x) var(--water-y),
+      rgb(255 255 255 / 38%) 0,
+      rgb(196 155 255 / 25%) 8rem,
+      transparent 24rem
+    ),
+    linear-gradient(to bottom, transparent, rgb(152 98 244 / 55%) 55%, #a970ff);
+  mask-image: linear-gradient(to bottom, transparent, black 10rem);
+  transform-origin: 50% 0;
+  will-change: auto;
+}
+
+.about-liquid-body::before {
+  position: absolute;
+  inset: -8% -4% 35%;
+  background:
+    radial-gradient(ellipse at 20% 40%, rgb(255 255 255 / 22%), transparent 24%),
+    radial-gradient(ellipse at 72% 15%, rgb(93 38 181 / 24%), transparent 31%),
+    radial-gradient(ellipse at 52% 72%, rgb(223 198 255 / 16%), transparent 28%);
+  content: "";
+  filter: blur(18px);
+  animation: liquid-caustics 6.5s ease-in-out infinite alternate;
+}
+
+.about-liquid-body::after {
   position: absolute;
   inset: -18%;
   background:
     repeating-radial-gradient(
-      ellipse at 50% -15%,
-      transparent 0 3.8rem,
-      rgb(255 255 255 / 13%) 4rem,
-      transparent 4.35rem 7.5rem
+      ellipse at var(--water-x) calc(var(--water-y) - 8rem),
+      transparent 0 4.8rem,
+      rgb(255 255 255 / 19%) 5rem,
+      transparent 5.35rem 9rem
     );
   content: "";
-  opacity: 0.42;
+  opacity: 0.64;
   transform: translate3d(0, 0, 0) scale(1.08);
-  animation: water-drift 8s ease-in-out infinite alternate;
+  animation: water-drift 4.8s ease-in-out infinite alternate;
   pointer-events: none;
+}
+
+.liquid-edge {
+  position: absolute;
+  z-index: 1;
+  top: -4rem;
+  display: block;
+  width: 100%;
+  height: calc(100% + 4rem);
+  fill: #ac75fc;
 }
 
 .about-water-ripple {
@@ -1987,10 +2022,56 @@ body::-webkit-scrollbar {
   pointer-events: none;
 }
 
+.scroll-text {
+  display: block;
+}
+
+.scroll-heading-stage {
+  min-width: 0;
+}
+
+.scroll-heading-stage::after {
+  display: block;
+  height: 100vh;
+  content: "";
+}
+
+.scroll-heading-stage > .section-heading {
+  position: sticky;
+  top: 20vh;
+}
+
+.scroll-heading-stage[data-reduced-motion="true"]::after {
+  display: none;
+}
+
+.scroll-heading-stage[data-reduced-motion="true"] > .section-heading {
+  position: static;
+}
+
+.scroll-text-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.scroll-word-mask {
+  display: inline-block;
+  overflow: clip;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+  vertical-align: bottom;
+}
+
+.scroll-word {
+  display: inline-block;
+}
+
 .about-heading-motion {
-  transform: translate3d(calc(var(--about-heading-x) * 1px), 0, 0);
-  opacity: var(--about-content-opacity);
-  will-change: transform, opacity;
+  position: relative;
 }
 
 .about-content-motion {
@@ -2040,10 +2121,19 @@ body::-webkit-scrollbar {
 
 @keyframes water-drift {
   0% {
-    transform: translate3d(-1.5%, -1%, 0) scale(1.04, 1.08) rotate(-0.6deg);
+    transform: translate3d(-2.5%, -2%, 0) scale(1.03, 1.1) rotate(-0.8deg);
   }
   100% {
-    transform: translate3d(1.5%, 2%, 0) scale(1.1, 1.04) rotate(0.6deg);
+    transform: translate3d(2.5%, 3%, 0) scale(1.12, 1.02) rotate(0.8deg);
+  }
+}
+
+@keyframes liquid-caustics {
+  0% {
+    transform: translate3d(-3%, -1%, 0) rotate(-1deg) scale(1.02);
+  }
+  100% {
+    transform: translate3d(4%, 4%, 0) rotate(1.5deg) scale(1.12);
   }
 }
 
@@ -2107,6 +2197,9 @@ body::-webkit-scrollbar {
   }
 
   .about-motion-surface::after,
+  .about-liquid-body,
+  .about-liquid-body::before,
+  .about-liquid-body::after,
   .about-water-ripple,
   .tech-label::after,
   .project-category,

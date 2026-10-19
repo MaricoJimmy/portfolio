@@ -27,7 +27,7 @@ describe("scroll motion", () => {
       coreOpacity: 0.85,
       coreRotate: 16,
       coreScale: 0.54,
-      coreX: 259.2,
+      coreX: 432,
       coreY: 440,
       portraitScale: 1.045,
       portraitY: 70,

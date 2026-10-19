@@ -12,7 +12,7 @@ export function getHeroScrollMotion(
     coreOpacity: Number((1 - coreTransition * 0.15).toFixed(4)),
     coreRotate: value * 16,
     coreScale: Number((1 - coreTransition * 0.46).toFixed(4)),
-    coreX: coreTransition * viewportWidth * 0.18,
+    coreX: coreTransition * viewportWidth * 0.3,
     coreY: coreTransition * viewportHeight * 0.44,
     portraitScale: Number((1 + value * 0.045).toFixed(4)),
     portraitY: value * 70,
