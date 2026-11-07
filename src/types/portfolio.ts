@@ -72,6 +72,8 @@ export interface PortfolioData {
     goal: LocalizedText;
     email: string;
     portrait: string;
+    /** Public path of the downloadable CV (PDF in /public). */
+    cv: string;
   };
   navigation: NavigationItem[];
   socialLinks: SocialLink[];
@@ -85,6 +87,7 @@ export interface PortfolioData {
     closeMenu: LocalizedText;
     exploreProjects: LocalizedText;
     contactMe: LocalizedText;
+    downloadCv: LocalizedText;
     viewCaseStudy: LocalizedText;
     repository: LocalizedText;
     close: LocalizedText;

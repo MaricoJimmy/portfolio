@@ -26,6 +26,7 @@ export const portfolioData: PortfolioData = {
     },
     email: "vuvantung204@gmail.com",
     portrait: "/images/vu-van-tung-profile.png",
+    cv: "/cv/Vu_Van_Tung_CV.pdf",
   },
   navigation: [
     { id: "home", label: { en: "Home", vi: "Trang chủ" } },
@@ -280,6 +281,7 @@ export const portfolioData: PortfolioData = {
     closeMenu: { en: "Close menu", vi: "Đóng menu" },
     exploreProjects: { en: "Explore projects", vi: "Khám phá dự án" },
     contactMe: { en: "Contact me", vi: "Liên hệ mình" },
+    downloadCv: { en: "Download CV", vi: "Tải CV" },
     viewCaseStudy: { en: "View case study", vi: "Xem chi tiết" },
     repository: { en: "View repository", vi: "Xem repository" },
     close: { en: "Close", vi: "Đóng" },

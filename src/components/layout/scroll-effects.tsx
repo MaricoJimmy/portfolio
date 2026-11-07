@@ -15,7 +15,7 @@ const SHUTTER_ROWS = 10;
  * - Shutter: `[data-shutter="<next section colour>"]` sections get rows that close
  *   from the bottom as the section leaves, handing over to the next section's colour.
  * - Parallax on project images.
- * - Footer reveal: `[data-footer-reveal]` content rises from -25% while its dark veil fades.
+ * - Footer reveal: `[data-footer-reveal]`'s `[data-footer-inner]` rises from -25% while its veil fades.
  */
 export function ScrollEffects() {
   const reducedMotion = useReducedMotion();
@@ -79,7 +79,8 @@ export function ScrollEffects() {
       });
 
       gsap.utils.toArray<HTMLElement>("[data-footer-reveal]").forEach((footer) => {
-        const content = footer.querySelectorAll(":scope > :not([data-footer-veil])");
+        // One wrapper, one tween: animating each child separately let them drift apart.
+        const content = footer.querySelector("[data-footer-inner]");
         const veil = footer.querySelector("[data-footer-veil]");
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -90,7 +91,7 @@ export function ScrollEffects() {
             invalidateOnRefresh: true,
           },
         });
-        timeline.from(content, { y: () => -footer.offsetHeight * 0.25, ease: "none" });
+        if (content) timeline.from(content, { y: () => -footer.offsetHeight * 0.25, ease: "none" });
         if (veil) timeline.from(veil, { opacity: 0.5, ease: "none" }, "<");
       });
     });

@@ -2241,3 +2241,76 @@ html.lenis body {
     display: none;
   }
 }
+
+.contact-cv {
+  margin-top: 1.25rem;
+}
+
+/* Mobile pass. Kept last on purpose: several desktop "scroll choreography" rules above are
+   declared after the earlier mobile blocks and would otherwise win the cascade. */
+@media (max-width: 600px) {
+  /* One screen tall (was a fixed 920px, taller than most phones), so the CTAs land on
+     the first screen above the chat launcher. */
+  .hero-section {
+    min-height: max(100svh, 44rem);
+  }
+
+  /* The scroll wrapper, not .hero-copy, sets the column width (35vw on desktop). */
+  .hero-copy-scroll {
+    right: 1.25rem;
+    bottom: 7.5rem;
+    left: 1.25rem;
+    width: auto;
+  }
+
+  /* Primary CTA on its own row, Contact + CV side by side: keeps the stack short enough
+     to clear the chat launcher in the bottom-right corner. */
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .hero-actions .button {
+    width: auto;
+    flex: 1 1 calc(50% - 0.3rem);
+    justify-content: center;
+  }
+
+  .hero-actions .button-primary {
+    flex-basis: 100%;
+  }
+
+  /* Planet sits in the empty space above the name instead of on top of it. */
+  #ai-core-mount {
+    top: 20%;
+    left: 30%;
+    width: 11rem;
+    height: 11rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-lead {
+    max-width: none;
+  }
+
+  /* Header row, left of the menu button: the chat launcher owns the bottom-right corner
+     and the hero socials own the bottom-left. */
+  .language-switcher {
+    /* Above the fixed .site-header (z 70) it now shares a row with. */
+    z-index: 80;
+    top: max(0.85rem, env(safe-area-inset-top));
+    right: calc(max(1rem, env(safe-area-inset-right)) + 3.4rem);
+    bottom: auto;
+    padding: 0.2rem;
+  }
+
+  .language-switcher button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}

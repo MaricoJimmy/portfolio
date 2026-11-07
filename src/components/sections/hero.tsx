@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRef } from "react";
@@ -78,6 +78,10 @@ export function Hero() {
             <a className="button button-secondary" href="#contact">
               {t(ui.contactMe)}
               <ArrowUpRight aria-hidden="true" size={18} />
+            </a>
+            <a className="button button-secondary" download href={profile.cv}>
+              {t(ui.downloadCv)}
+              <Download aria-hidden="true" size={18} />
             </a>
           </div>
         </Reveal>
