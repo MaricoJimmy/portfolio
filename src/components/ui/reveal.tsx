@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
 
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+
+const noopSubscribe = () => () => undefined;
 
 type RevealProps = {
   children: ReactNode;
@@ -13,7 +15,12 @@ type RevealProps = {
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reducedMotion = useReducedMotion();
-  const canObserveViewport = typeof IntersectionObserver !== "undefined";
+  // Server snapshot is `true` so the hydration render matches SSR; jsdom (no IO) then shows content.
+  const canObserveViewport = useSyncExternalStore(
+    noopSubscribe,
+    () => typeof IntersectionObserver !== "undefined",
+    () => true,
+  );
   const showImmediately = reducedMotion || !canObserveViewport;
 
   return (

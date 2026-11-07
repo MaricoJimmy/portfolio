@@ -8,7 +8,7 @@ export function Journey() {
   const { language, t } = useLanguage();
 
   return (
-    <section className="content-section journey-section" id="experience">
+    <section className="content-section journey-section" data-paint id="experience">
       <SectionHeading
         eyebrow="05 / Journey"
         title={language === "en" ? "Learning. Shipping. Growing." : "Học hỏi. Triển khai. Phát triển."}

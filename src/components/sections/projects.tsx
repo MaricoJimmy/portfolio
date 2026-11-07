@@ -36,7 +36,7 @@ export function Projects() {
       : portfolioData.projects.filter((project) => project.category === value).length;
 
   return (
-    <section className="content-section projects-section" id="projects">
+    <section className="content-section projects-section" data-shutter="#a970ff" id="projects">
       <div className="projects-heading-row">
         <SectionHeading
           eyebrow="04 / Selected work"
@@ -74,7 +74,7 @@ export function Projects() {
                   ))}
                 </dl>
               )}
-              <ul className="technology-list" aria-label="Technologies">
+              <ul aria-label="Technologies" className="technology-list">
                 {project.technologies.slice(0, 4).map((technology) => (
                   <li key={technology}>{technology}</li>
                 ))}

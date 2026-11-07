@@ -11,9 +11,10 @@ export function getHeroScrollMotion(
     copyY: value === 0 ? 0 : value * -50,
     coreOpacity: Number((1 - coreTransition * 0.15).toFixed(4)),
     coreRotate: value * 16,
-    coreScale: Number((1 - coreTransition * 0.46).toFixed(4)),
-    coreX: coreTransition * viewportWidth * 0.3,
-    coreY: coreTransition * viewportHeight * 0.44,
+    coreScale: Number((1 - coreTransition * 0.58).toFixed(4)),
+    // Mount is centred at (40vw, 50vh); settle its centre ~120px/150px inside the bottom-right corner.
+    coreX: coreTransition * (viewportWidth * 0.6 - 120),
+    coreY: coreTransition * (viewportHeight * 0.5 - 150),
     portraitScale: Number((1 + value * 0.045).toFixed(4)),
     portraitY: value * 70,
     railOpacity: 1 - value,

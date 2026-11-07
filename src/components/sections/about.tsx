@@ -56,6 +56,8 @@ export function About() {
     <section
       className="content-section about-section"
       data-scroll-scene="about"
+      data-shutter="#0d0d0e"
+      data-paint
       id="about"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}

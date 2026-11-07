@@ -19,7 +19,6 @@ describe("portfolio home page", () => {
     expect(hero).toHaveAttribute("data-visual-stage", "gravity");
     expect(hero).toHaveAttribute("data-scroll-scene", "hero");
     const heroQueries = within(hero as HTMLElement);
-    expect(heroQueries.getByTestId("gravity-mark")).toBeInTheDocument();
     expect(
       screen.getByText("Software Engineer / Aspiring AI Engineer"),
     ).toBeInTheDocument();

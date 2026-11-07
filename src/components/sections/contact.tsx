@@ -35,7 +35,8 @@ export function Contact() {
   };
 
   return (
-    <section className="contact-section" id="contact">
+    <section className="contact-section" data-footer-reveal id="contact">
+      <div aria-hidden="true" className="footer-veil" data-footer-veil />
       <p className="contact-kicker">06 / Contact</p>
       <h2>
         {language === "en" ? "Let's build something" : "Cùng xây dựng điều gì đó"}

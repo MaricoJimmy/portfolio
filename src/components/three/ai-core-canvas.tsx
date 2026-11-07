@@ -14,6 +14,7 @@ export function AiCoreFallback() {
 export function AiCoreCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [compact, setCompact] = useState(true);
+  const [ready, setReady] = useState(false);
   const pageVisible = usePageVisibility();
   const reducedMotion = useReducedMotion();
 
@@ -38,13 +39,14 @@ export function AiCoreCanvas() {
 
   return (
     <div className="ai-core" ref={containerRef}>
-      <AiCoreFallback />
+      {!ready && <AiCoreFallback />}
       <Canvas
         aria-label="Interactive AI Core visualization"
-        camera={{ fov: 42, position: [0, 0, compact ? 7.2 : 6.4] }}
+        camera={{ fov: 42, position: [0, 0, 7.4] }}
         dpr={compact ? 1 : [1, 1.5]}
         frameloop={pageVisible && !reducedMotion ? "always" : "demand"}
         gl={{ alpha: true, antialias: !compact, powerPreference: "high-performance" }}
+        onCreated={() => setReady(true)}
       >
         <AiCoreScene active={pageVisible} compact={compact} reducedMotion={reducedMotion} />
       </Canvas>

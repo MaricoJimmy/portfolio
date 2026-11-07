@@ -58,7 +58,7 @@ export function ProjectDialog({ onOpenChange, open, project, triggerRef }: Proje
   };
 
   return (
-    <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && close()}>
+    <div className="dialog-backdrop" data-lenis-prevent onMouseDown={(event) => event.target === event.currentTarget && close()}>
       <div
         aria-labelledby="project-dialog-title"
         aria-modal="true"

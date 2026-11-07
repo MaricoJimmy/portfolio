@@ -9,7 +9,7 @@ export function Skills() {
   const { language, t } = useLanguage();
 
   return (
-    <section className="content-section skills-section" id="skills">
+    <section className="content-section skills-section" data-shutter="#171719" id="skills">
       <SectionHeading
         eyebrow="03 / Toolkit"
         title={language === "en" ? "A practical AI stack." : "Bộ công cụ AI thực tiễn."}

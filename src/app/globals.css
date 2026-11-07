@@ -29,8 +29,11 @@
   box-sizing: border-box;
 }
 
-html {
+html:not(.lenis) {
   scroll-behavior: smooth;
+}
+
+html {
   scroll-padding-top: 6rem;
 }
 
@@ -1031,7 +1034,8 @@ button {
 .language-switcher {
   position: fixed;
   z-index: 60;
-  right: max(0.75rem, env(safe-area-inset-right));
+  /* Sits left of the chat widget's 160px iframe (docked bottom-right), which would swallow clicks. */
+  right: calc(160px + max(0.25rem, env(safe-area-inset-right)));
   bottom: max(0.75rem, env(safe-area-inset-bottom));
   display: flex;
   padding: 0.3rem;
@@ -1452,46 +1456,10 @@ body::before {
   filter: drop-shadow(0 0 2.2rem rgb(169 112 255 / 32%));
 }
 
-.gravity-mark {
-  position: absolute;
-  z-index: 6;
-  top: 50%;
-  left: 40%;
-  width: clamp(12rem, 18vw, 18rem);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  opacity: 0.22;
-}
 
-.gravity-mark span {
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-}
 
-.gravity-mark-dot {
-  top: 2%;
-  right: 13%;
-  width: 12%;
-  aspect-ratio: 1;
-  background: var(--paper);
-}
 
-.gravity-mark-core {
-  top: 19%;
-  left: 21%;
-  width: 39%;
-  aspect-ratio: 1;
-  background: #a970ff;
-}
 
-.gravity-mark-orbit {
-  right: 16%;
-  bottom: 5%;
-  width: 47%;
-  aspect-ratio: 1;
-  border: clamp(1.1rem, 2vw, 2rem) solid var(--paper);
-}
 
 .stage-coordinate {
   position: absolute;
@@ -1741,8 +1709,7 @@ body::before {
     opacity: 0.46;
   }
 
-  #ai-core-mount,
-  .gravity-mark {
+  #ai-core-mount {
     left: 54%;
   }
 
@@ -1782,10 +1749,6 @@ body::before {
     opacity: 0.92;
   }
 
-  .gravity-mark {
-    top: 35%;
-    left: 29%;
-  }
 
   .stage-coordinate,
   .stage-manifesto {
@@ -1877,19 +1840,6 @@ body::-webkit-scrollbar {
   will-change: transform;
 }
 
-.gravity-mark {
-  transform:
-    translate(-50%, -50%)
-    translate3d(
-      calc(var(--hero-core-x) * 0.72px),
-      calc(var(--hero-core-y) * 0.72px),
-      0
-    )
-    rotate(calc(var(--hero-core-rotate) * -0.6deg))
-    scale(var(--hero-core-scale));
-  opacity: calc(var(--hero-core-opacity) * 0.22);
-  will-change: transform, opacity;
-}
 
 .hero-portrait {
   transform:
@@ -2102,7 +2052,7 @@ body::-webkit-scrollbar {
     -0.08em 0 #75f2ff;
   clip-path: inset(42% 0 38% 0);
   transform: translateX(0);
-  animation: tech-scan 5.4s steps(1, end) infinite;
+  animation: tech-scan 2.4s steps(1, end) infinite;
   pointer-events: none;
 }
 
@@ -2149,27 +2099,28 @@ body::-webkit-scrollbar {
 }
 
 @keyframes tech-scan {
+  /* 2.4s cycle; the burst (76%–88%) stays ~0.3s long. */
   0%,
-  84%,
+  75%,
   100% {
     opacity: 0;
     transform: translateX(0);
   }
-  85% {
+  76% {
     opacity: 0.8;
     transform: translateX(-0.08em);
   }
-  87% {
+  80% {
     opacity: 0.45;
     clip-path: inset(12% 0 68% 0);
     transform: translateX(0.1em);
   }
-  89% {
+  84% {
     opacity: 0.72;
     clip-path: inset(68% 0 10% 0);
     transform: translateX(-0.04em);
   }
-  91% {
+  88% {
     opacity: 0;
   }
 }
@@ -2186,7 +2137,6 @@ body::-webkit-scrollbar {
 
 @media (prefers-reduced-motion: reduce) {
   #ai-core-mount,
-  .gravity-mark,
   .hero-portrait,
   .hero-copy-scroll,
   .hero-rail,
@@ -2211,6 +2161,83 @@ body::-webkit-scrollbar {
   }
 
   .tech-label::after {
+    display: none;
+  }
+}
+
+/* Third-party chat widget (iframe): soft rise-in after the hero intro settles. */
+#chat-widget-root iframe {
+  animation: chat-widget-in 520ms cubic-bezier(0.22, 1, 0.36, 1) 600ms both;
+}
+
+@keyframes chat-widget-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chat-widget-root iframe {
+    animation: none;
+  }
+}
+
+/* Scroll choreography (see components/layout/scroll-effects.tsx). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+[data-shutter],
+[data-footer-reveal] {
+  position: relative;
+  /* clip, not hidden: hidden would create a scroll container and break the sticky headings. */
+  overflow: clip;
+}
+
+.shutter-panel {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.shutter-panel span {
+  flex: 1;
+  /* 1px overlap hides hairline seams between rows. */
+  margin-bottom: -1px;
+  background: var(--shutter-color);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+}
+
+.footer-veil {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Paint-brush trail over purple sections (components/ui/paint-trail.tsx). */
+.paint-trail {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .paint-trail {
     display: none;
   }
 }

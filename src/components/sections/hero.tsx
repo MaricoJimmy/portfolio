@@ -62,11 +62,6 @@ export function Hero() {
       <div id="ai-core-mount">
         <AiCoreCanvas />
       </div>
-      <div aria-hidden="true" className="gravity-mark" data-testid="gravity-mark">
-        <span className="gravity-mark-dot" />
-        <span className="gravity-mark-core" />
-        <span className="gravity-mark-orbit" />
-      </div>
 
       <div className="hero-copy-scroll">
         <Reveal className="hero-copy" delay={0.08}>
