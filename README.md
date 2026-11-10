@@ -11,7 +11,6 @@ Bilingual (English / Tiếng Việt), built around an interactive 3D hero and sc
   between sections, project image parallax, and a footer reveal on Contact.
 - **Interactions** — paint-brush cursor trail on the purple sections, water ripples on About,
   glitching tech labels.
-- **AI chatbot** — uLeadGen chat widget, lazy-loaded so it doesn't slow the first paint.
 - **Accessible by default** — every animation is disabled under `prefers-reduced-motion`, and
   pointer effects only run on mouse/trackpad devices.
 
@@ -65,9 +64,3 @@ src/
 tests/               Vitest specs
 ```
 
-## Chatbot
-
-The widget is embedded in [`src/app/layout.tsx`](src/app/layout.tsx). Its appearance, avatar and
-allowed domains are managed in the uLeadGen dashboard — add your production domain to the
-**Domain Whitelist** there, or the widget will not show. An animated launcher icon is available at
-`public/images/chat-icon.gif`.

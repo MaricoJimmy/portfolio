@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import type { ReactNode } from "react";
 
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
@@ -50,14 +49,6 @@ export default function RootLayout({
           {children}
           <LanguageSwitcher />
         </LanguageProvider>
-        {/* Bottom-right; the language switcher sits above it (see .language-switcher). */}
-        <Script
-          id="uleadgen-widget"
-          src="https://app.uleadgen.net/chat-widget.js"
-          data-token="32b7847f-5ae6-4942-a2f2-aecdb2038ed9"
-          data-position="bottom_right"
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );
